@@ -535,18 +535,7 @@
                     {
                       "hasCustomCollisionMask": false,
                       "image": "NewSprite2",
-                      "points": [
-                        {
-                          "name": "Point1",
-                          "x": 62.996155375845156,
-                          "y": 31.66114278138672
-                        },
-                        {
-                          "name": "Point2",
-                          "x": 8.015378496619382,
-                          "y": 52.872862256396665
-                        }
-                      ],
+                      "points": [],
                       "originPoint": {
                         "name": "origine",
                         "x": 31.9421980644306,
@@ -688,6 +677,33 @@
             },
             {
               "type": {
+                "value": "SetObjectVariableAsBoolean"
+              },
+              "parameters": [
+                "Ball",
+                "DrawRubberBand",
+                "True"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "ObjectVariableAsBoolean"
+              },
+              "parameters": [
+                "Ball",
+                "DrawRubberBand",
+                "True"
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "type": {
                 "value": "PrimitiveDrawing::OutlineColor"
               },
               "parameters": [
@@ -701,8 +717,8 @@
               },
               "parameters": [
                 "NewShapePainter",
-                "Ball.PointX(\"Point1\")",
-                "Ball.PointY(\"Point1\")",
+                "Ball.CenterX()",
+                "Ball.CenterY()",
                 "Top.CenterX()",
                 "Top.CenterY()",
                 "15"
@@ -729,17 +745,34 @@
                 "Bottom.CenterY()",
                 "15"
               ]
-            },
+            }
+          ],
+          "events": [
             {
-              "type": {
-                "value": "RotateTowardPosition"
-              },
-              "parameters": [
-                "Ball",
-                "Targeting.CenterX()",
-                "Targeting.CenterY()",
-                "0",
-                ""
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "PosX"
+                  },
+                  "parameters": [
+                    "Ball",
+                    ">",
+                    "Bottom.CenterX()"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetObjectVariableAsBoolean"
+                  },
+                  "parameters": [
+                    "Ball",
+                    "DrawRubberBand",
+                    "False"
+                  ]
+                }
               ]
             }
           ]
@@ -803,16 +836,6 @@
               ]
             }
           ]
-        },
-        {
-          "type": "BuiltinCommonInstructions::Standard",
-          "conditions": [],
-          "actions": []
-        },
-        {
-          "type": "BuiltinCommonInstructions::Standard",
-          "conditions": [],
-          "actions": []
         },
         {
           "type": "BuiltinCommonInstructions::Standard",
